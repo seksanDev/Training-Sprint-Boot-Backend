@@ -10,7 +10,6 @@ public class SecurityUtil {
 
     }
 
-    @SuppressWarnings("unchecked")
     public static Optional<String> getCurrentUserId() {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null) {
@@ -25,6 +24,7 @@ public class SecurityUtil {
         if (principal == null) {
             return Optional.empty();
         }
-        return (Optional<String>) principal;
+        String userId = (String) principal;
+        return Optional.of(userId);
     }
 }
