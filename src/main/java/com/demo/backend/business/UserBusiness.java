@@ -9,6 +9,7 @@ import com.demo.backend.exception.BaseException;
 import com.demo.backend.exception.UserException;
 import com.demo.backend.mapper.UserMapper;
 import com.demo.backend.model.MLoginRequest;
+import com.demo.backend.model.MLoginResponse;
 import com.demo.backend.model.MRegisterRequest;
 import com.demo.backend.model.MRegisterResponse;
 import com.demo.backend.service.TokenService;
@@ -33,7 +34,7 @@ public class UserBusiness {
         return userMapper.toRegisterResponse(user);
     }
 
-    public String login(MLoginRequest request) throws BaseException {
+    public MLoginResponse login(MLoginRequest request) throws BaseException {
         // Validate
 
         // Verify Database
@@ -48,7 +49,9 @@ public class UserBusiness {
             throw UserException.loginFailPasswordIncorrert();
         }
 
-        return tokenService.tokennize(user);
+        MLoginResponse response = new MLoginResponse();
+        response.setToken(tokenService.tokennize(user));
+        return response;
 
     }
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.backend.business.UserBusiness;
 import com.demo.backend.exception.BaseException;
 import com.demo.backend.model.MLoginRequest;
+import com.demo.backend.model.MLoginResponse;
 import com.demo.backend.model.MRegisterRequest;
 import com.demo.backend.model.MRegisterResponse;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +27,9 @@ public class UserApi {
 
     // login
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody MLoginRequest request) throws BaseException {
+    public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws BaseException {
 
-        String response = business.login(request);
+        MLoginResponse response = business.login(request);
         return ResponseEntity.ok(response);
     }
 
